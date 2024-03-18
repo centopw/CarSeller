@@ -1,6 +1,7 @@
 import { NewspaperIcon, BoltIcon, CpuChipIcon, PowerIcon } from "@heroicons/react/24/outline"
 import { products } from '../data'
 import React, { useState } from "react"
+import { Link } from "react-router-dom";
 
 export default function Product() {
   const [carType, setCarType] = useState('');
@@ -60,19 +61,18 @@ export default function Product() {
           {filteredProducts.map((product) => (
             <div key={product.id} className="group relative border-b border-r border-gray-200 p-4 sm:p-6">
               <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
-                <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="h-full w-full object-cover object-center"
-                />
+                {product.imageSrc && product.imageAlt && (
+                  <img
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    className="h-full w-full object-cover object-center"
+                  />
+                )}
               </div>
               <div className="pb-4 pt-10 text-left">
                 <div className="flex">
                   <h3 className="text-sm font-medium text-gray-900 flex-auto w-48">
-                    <a href={product.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.name}
-                    </a>
+                    {product.name}
                   </h3>
                   <span className="text-sm font-medium text-gray-900 justify-end flex-auto bg-gray-100 round-xl text-center">{product.makeYear}</span>
                 </div>
@@ -95,8 +95,8 @@ export default function Product() {
                   </span>
                 </div>
                 <div className="flex justify-center">
-                  <span className="mt-5 block py-2 text-base font-medium text-gray-900 hover:bg-gray-50  w-24 flex-auto">{product.price} /month</span>
-                  <button type="button" className="mt-5 block bg-white border border-gray-200 rounded-md py-2 text-base font-medium text-gray-900 hover:bg-gray-50 flex-auto">Rent now</button>
+                  <span className="mt-5 text-lg block py-2 font-semibold text-gray-900 w-24 flex-auto">{product.price} /month</span>
+                  <Link to={`/product/${product.id}`} type="button" className="mt-5 block bg-indigo-500 border rounded-md py-2 text-base font-medium text-white hover:bg-indigo-400 flex-auto text-center">Rent now</Link>
                 </div>
 
               </div>
